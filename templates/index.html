@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container my-0 my-sm-5 py-0 py-sm-5 conts">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'images/hero2.png' %}" alt="People making cricket team" class="img-fluid herolg">
+            <img src="{% static 'images/hero.png' %}" alt="People making cricket team" class="img-fluid herosm">
+        </div>
+        <div class="col-md-6">
+            <div class="mx-auto mt-0 mt-sm-5 conts" id="small_center">
+                <h5 class="title">MAKE YOUR OWN <span class="text-success">IPL<br id="aa">
+                        TEAM</span> AND COMPETE <br id="aa">
+                    WITH YOUR FRIENDS !
+                </h5>
+                <p class="inside_title ml-2">Be a captain, decide your team yourself and compete with<br id="aa"> other
+                    virtual captains </p>
+                <br>
+                <a href="{% url 'matches' %}" class="btn btn-success ml-2 btn-lg bg-success create2">Create Your
+                    Team Now!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container my-2 my-sm-5 p-2">
+    <h3 class="text-center text-dark abcd">UPCOMING <span class="text-danger">MATCHES</span></h3>
+</div>
+
+<div class="container conts">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 fonttt">
+        {% for match in top3 %}
+        <div class="col my-2">
+            <div class=" border rad">
+                <div class="row row-cols-2 border-bottom p-3 m-2">
+                    <div class="col col-9">Indian Premiere League</div>
+                    <div class="col col-3"><span class="badge bg-danger">Match {{match.match_no}}</span></div>
+                </div>
+                <div class="row p-1 m-2">
+                    <div class="col text-center text-danger">{{match.match_date}}</div>
+                </div>
+                <div class="row row-cols-2 p-2 m-2">
+                    <div class="col">{{match.teama}}</div>
+                    <div class="col text-right">{{match.teamb}}</div>
+                </div>
+                <div class="row m-2">
+                    <div class="col"><img src="{{match.teama.logo.url}}" alt="" class="img-fluid"></div>
+                    <div class="col text-center title">VS</div>
+                    <div class="col text-right"><img src="{{match.teamb.logo.url}}" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="row row-cols-3 p-3">
+                    <div class="col-2"></div>
+                    <div class="col-8 text-center"><a href="{% url 'team_select' match.match_no %}" class="btn btn-sm create link2">Create
+                            Team Now!</a></div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}        
+    </div>
+</div>
+
+<div class="container my-4 my-sm-5 p-2 conts">
+    <h3 class="text-center text-dark abcd">FREQUENTLY <span class="text-success">ASKED</span> QUESTIONS</h3>
+</div>
+
+<div class="container conts">
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn  btn-block text-left" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        How to Play ??
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                    3 wolf moon officia aute, non cupidatat.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn  btn-block text-left" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                        What are the Rules and regulations ?
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                    laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
+                    coffee nulla assumenda shoreditch et.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn  btn-block text-left" type="button" data-toggle="collapse"
+                        data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+                        What can i do ?
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                    laborum eiusmod. Brunch 3 wolf moon tempor.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'foot.html' %}
+{% endblock %}
