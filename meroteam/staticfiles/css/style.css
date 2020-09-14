@@ -280,7 +280,7 @@ body {
 .sticky{
   background-color: #ffffff;
   position: sticky;
-  top:0;
+  top:0px;
 }
 input[type=checkbox].css-checkbox{ display: none; }
 
