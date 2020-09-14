@@ -1,1 +1,1 @@
-web: gunicorn meroteam.wsgi
+web: gunicorn meroteam.wsgi --log-file -
