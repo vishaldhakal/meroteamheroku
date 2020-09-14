@@ -13,7 +13,7 @@ SECRET_KEY = 'y6q^za#6f$#30_^&$ky%k7n=5oopu0)9+@6k-=y&k$ujg-b_lh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['meroteam.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -109,10 +109,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    Path(BASE_DIR, 'meroteam/static'),
+    Path(BASE_DIR, 'meroteam/staticfiles'),
 ]
 
-STATIC_ROOT = Path(BASE_DIR, 'static')
+STATIC_ROOT = Path(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'media')
