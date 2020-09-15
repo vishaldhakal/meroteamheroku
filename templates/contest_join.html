@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container my-2 my-sm-5 p-2">
+    <h3 class="text-center text-dark title">SELECT <span class="text-danger">THE TEAM WITH WHICH YOU WANT TO JOIN THIS CONTEST</span></h3>
+</div>
+{% if count == 0 %}
+<div class="container">
+    <p>If You havenot created any team yet, <a href="{% url 'matches' %}">create it first now</a></p>
+</div>
+{% endif %}
+
+<form action="{% url 'contest_join_submit' contest.id %}" method="POST">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for teams in teams_list %}
+            <div class="form-check form-switch mycen">
+                <input class="form-check-input" type="radio" id="checkbox1{{teams.id}}" value="{{teams.id}}" name="radios">
+                <label class="form-check-label" for="checkbox1{{teams.id}}"><div class="col">
+                    <div class="ab m-3 shadow-sm rounded">
+                        <div class="row row-cols-2 p-1 bg-mine text-light rounded-top">
+                            <div class="col-6 text-left">{{teams.name}}</div>
+                            <div class="col-4 text-right"></div>
+                        </div>
+                        <div class="row row-cols-4 p-2" style="background: url('{% static 'images/field.jpg' %}');background-size:cover;">
+                            <div class="col text-center text-white mt-4">{{teams.match.teama}} <br>{{teams.get_teama_count}}</div>
+                            <div class="col text-center text-white mt-4">{{teams.match.teamb}} <br>{{teams.get_teamb_count}}</div>
+                            <div class="col text-center"><img src="{{teams.captain.image.url}}" alt="" class="img-fluid"><span class="badge rounded-pill bg-danger text-light">C</span></div>
+                            <div class="col text-center"><img src="{{teams.vicecaptain.image.url}}" alt="" class="img-fluid"><span class="badge rounded-pill bg-danger text-light">VC</span></div>
+                        </div>
+                        <div class="row row-cols-4 rounded-bottom bg-white shadow-sm sm">
+                            <div class="col text-center text-dark font-weight-bold"><span class="text-mine">WK</span> {{teams.get_wicket_count}}</div>
+                            <div class="col text-center text-dark font-weight-bold"><span class="text-mine">BAT</span> {{teams.get_bat_count}}</div>
+                            <div class="col text-center text-dark font-weight-bold"><span class="text-mine">BOW</span> {{teams.get_bowl_count}}</div>
+                            <div class="col text-center text-dark font-weight-bold"><span class="text-mine">AR</span> {{teams.get_all_count}}</div>
+                        </div>
+                    </div>
+                </div></label>
+            </div>
+                
+            </label>
+            {% endfor %}
+            <div class="flexx">
+                <input type="submit" class="btn bg-mine text-white" value="Continue"/>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% include 'foot.html' %}
+{% endblock %}

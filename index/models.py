@@ -98,6 +98,7 @@ class Team(models.Model):
 class Contest(models.Model):
     name = models.CharField(max_length = 500)
     match = models.ForeignKey(Match,on_delete=models.CASCADE)
+    teams = models.ManyToManyField(Team,blank=True)
 
     def __str__(self):
         return self.name

@@ -17,7 +17,7 @@
             </svg><br>
             Matches</a>
             {% url 'teams_list' as ur %}
-        <a href="{% url 'teams_list' %}" class="buttonn{% if request.path == ur %} text-danger col link {% else %}col link{% endif %}">
+        <a {% if user.is_authenticated %}href="{% url 'teams_list' %}"{% else %}href="{% url 'login'  %}"{% endif %} class="buttonn{% if request.path == ur %} text-danger col link {% else %}col link{% endif %}">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-badge" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"

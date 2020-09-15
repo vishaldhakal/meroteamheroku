@@ -155,7 +155,16 @@ body {
   text-decoration: none;
   color: #4180cb;
 }
-
+.contactus2{
+  position: fixed;
+  bottom: 60px;
+  left: 20px;
+  right: 20px;
+}
+.contactus2 button{
+  background-color: #0a473f !important;
+  border-radius:700px !important;
+}
 .about-company i {
   font-size: 25px;
 }
@@ -423,4 +432,9 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 .buttonn:focus:after {
   visibility: visible;
+}
+.mycen{
+  display: flex;
+  justify-content: space-around;
+  align-items: center !important;
 }

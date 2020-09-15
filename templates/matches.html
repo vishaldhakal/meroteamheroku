@@ -10,7 +10,7 @@
         {% for match in matches %}
         <a {% if user.is_authenticated %}href="{% url 'team_select' match.match_no %}"{% else %}href="{% url 'login'  %}"{% endif %} class="link">
             <div class="col my-3">
-                <div class="rounded shadow-sm">
+                <div class="rounded shadow">
                     <div class="row row-cols-2 border-bottom p-2 m-2">
                         <div class="col col-9">Indian Premiere League</div>
                         <div class="col col-3"><span class="badge bg-danger">Match {{match.match_no}}</span></div>

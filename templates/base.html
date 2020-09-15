@@ -65,7 +65,6 @@
     <div class="container py-5">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/loading.js' %}"></script>
-    <script src="{% static 'js/install.js' %}"></script>
     <script>
     if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -76,7 +75,7 @@
     });
   }else{
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('../sw.js')
+      navigator.serviceWorker.register('{% static "sw.js" %}')
           .then((reg) => {
             console.log('Service worker registered.', reg);
           });

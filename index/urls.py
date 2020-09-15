@@ -11,4 +11,6 @@ urlpatterns = [
     path('team-delete/<int:no>/',views.teams_delete,name="teams_delete"),
     path('team-select-submit/<no>/',views.team_select_submit,name="team_select_submit"),
     path('team-select-update/<int:no>/',views.team_select_update,name="team_select_update"),
+    path('contest-join/<int:no>/',views.contest_join,name="contest_join"),
+    path('contest-join-submit/<int:no>/',views.contest_join_submit,name="contest_join_submit"),
 ]

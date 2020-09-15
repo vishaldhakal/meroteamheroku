@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container my-2 my-sm-5 p-2">
+    <h3 class="text-center text-dark abcd">CLICK <span class="text-danger"> TO PAY !</span></h3>
+</div>
+
+<form action="https://uat.esewa.com.np/epay/main" method="POST">
+    <input value="50" name="tAmt" type="hidden">
+    <input value="45" name="amt" type="hidden">
+    <input value="5" name="txAmt" type="hidden">
+    <input value="0" name="psc" type="hidden">
+    <input value="0" name="pdc" type="hidden">
+    <input value="epay_payment" name="scd" type="hidden">
+    <input value="{{rand}}" name="pid" type="hidden">
+    <input value="http://127.0.0.1:8000/" type="hidden" name="su">
+    <input value="http://127.0.0.1:8000/matches/" type="hidden" name="fu">
+    <input value="Pay Now" type="submit" class="bg-mine btn btn-md text-white ml-5">
+</form>
+
+{% include 'foot.html' %}
+{% endblock %}

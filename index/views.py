@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Match,Player,Team
+from .models import Match,Player,Team,Contest
 from django.db.models import Q
 
 def index(request):
@@ -110,9 +110,9 @@ def team_select_update(request,no):
         return redirect('index')
 
 def contests(request):
-    matchess = Match.objects.order_by('match_no').all()
+    contests = Contest.objects.all()
     context = {
-        'matches':matchess
+        'contests':contests
     }
     return render(request,'contests.html',context)
 
@@ -129,3 +129,34 @@ def teams_delete(request,no):
     team.delete()
     return redirect('teams_list')
 
+def contest_join(request,no):
+    contest = Contest.objects.get(id=no)
+    match = contest.match
+    user = request.user
+    teams_list = Team.objects.filter(user=user)
+    teams_list = Team.objects.filter(match=match)
+    count = teams_list.count()
+    context = {
+        'teams_list':teams_list,
+        'contest':contest,
+        'count':count
+    }
+    return render(request,'contest_join.html',context)
+
+def contest_join_submit(request,no):
+    if request.method == "POST":
+        team = request.POST['radios']
+        teamm = Team.objects.get(id=int(team))
+        contest = Contest.objects.get(id=no)
+        contest.teams.add(teamm)
+        contest.save()
+        a = "scvajhbsdaseechgvjbngggee"
+        a = a+str(teamm.id)+teamm.name
+        context = {
+            'contest':contest,
+            'team':team,
+            'rand':a
+        }
+        return render(request,'esewaform.html',context)
+    else:
+        return redirect('contest_join',no=no)
