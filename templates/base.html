@@ -9,6 +9,14 @@
     <title>Mero Team | Build Your Dream Team Now</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
     {% block css %}
     {% endblock %}
     <script src="https://kit.fontawesome.com/b2682bc451.js" crossorigin="anonymous"></script>
@@ -49,50 +57,34 @@
             </div>
         </div>
     </nav>
+    <span class="loading__anim"></span>
 
     {% block body %}
     {% endblock %}
 
-    <div class="container my-5 py-5">
-    <hr>
-    <div class=" pb-5 footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-xs-12 about-company">
-                    <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" alt="Meroteam logo"
-                            class="img-fluid"></a>
-                    <p class="pr-5 inside_title2">Mero Team is a Leading fantasy sports platform in Nepal which enables
-                        users to create their own team and play with their friends.</p>
-                    <p><a href="#"><i class="fa fa-facebook-square mr-1"></i></a><a href="#"><i
-                                class="fa fa-linkedin-square"></i></a></p>
-                </div>
-                <div class="col-lg-3 col-xs-12 links">
-                    <h4 class="mt-lg-0 mt-sm-3">Links</h4>
-                    <ul class="m-0 p-0">
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">TEAMS</a></li>
-                        <li><a href="#">CONTESTS</a></li>
-                        <li><a href="#">ABOUT</a></li>
-                        <li><a href="#">CONTACT</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-xs-12 location">
-                    <h4 class="mt-lg-0 mt-sm-4">Location</h4>
-                    <p>Chandragiri, Kathmandu</p>
-                    <p class="mb-0"><i class="fa fa-phone mr-3"></i>+977 9866316114</p>
-                    <p><i class="fa fa-envelope-o mr-3"></i>hello@meroteam.com</p>
-                </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col copyright">
-                    <p class=""><small class="text-dark">© 2020. All Rights Reserved.</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="container py-5">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/loading.js' %}"></script>
+    <script src="{% static 'js/install.js' %}"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('{% static "sw.js" %}')
+          .then((reg) => {
+            console.log('Service worker registered.', reg);
+          });
+    });
+  }else{
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('../sw.js')
+          .then((reg) => {
+            console.log('Service worker registered.', reg);
+          });
+    });
+  }
+    </script>
+    {% block js %}
+    {% endblock %}
 </body>
 
 </html>

@@ -357,3 +357,70 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
   transform: translate(-50%, -50%);
   font-size: 0.5rem !important;
 }
+.loading__anim {  
+  width: 35px; 
+  height: 35px;  
+  display: inline-block;  
+  border: 5px solid rgba(255, 125, 125, 0.25);  
+  border-left-color: rgb(255, 0, 0);  border-top-color: rgb(229, 3, 3);  
+  border-radius: 50%;
+  animation: rotate 600ms infinite linear;
+  position: fixed;
+  top: 50%;
+  left: 45%;
+  opacity: 0.8;
+}
+@keyframes rotate { to {  transform: rotate(1turn) 
+}}
+
+.text-mine{
+  color: #aaaaaa;
+}
+.buttonn {
+  position: relative;
+  overflow: hidden;
+}
+
+.buttonn:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: -15px;
+  margin-top: -15px;
+  background: #ff00009a;
+  border-radius: 100%;
+  opacity: .6;
+
+  transform: scale(0);
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+  }
+  20% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.buttonn:not(:active):after {
+  animation: ripple 1s ease-out;
+}
+
+/* fixes initial animation run, without user input, on page load.
+ */
+ .buttonn:after {
+  visibility: hidden;
+}
+
+.buttonn:focus:after {
+  visibility: visible;
+}

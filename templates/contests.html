@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container my-2 my-sm-5 p-2">
+    <h3 class="text-center text-dark abcd">CONTESTS <span class="text-danger">RUNNING</span></h3>
+</div>
+
+<div class="container conts">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 fonttt">
+        {% for match in matches %}
+        <div class="col my-2">
+            <div class=" border rad">
+                <div class="row row-cols-2 border-bottom p-3 m-2">
+                    <div class="col col-9">Rs1000 Worth Prize</div>
+                    <div class="col col-3"><span class="badge bg-danger">Match {{match.match_no}}</span></div>
+                </div>
+                <div class="row p-1 m-2">
+                    <div class="col text-center text-danger">{{match.match_date}}</div>
+                </div>
+                <div class="row row-cols-2 p-2 m-2">
+                    <div class="col">{{match.teama}}</div>
+                    <div class="col text-right">{{match.teamb}}</div>
+                </div>
+                <div class="row m-2">
+                    <div class="col"><img src="{{match.teama.logo.url}}" alt="" class="img-fluid"></div>
+                    <div class="col text-center title">VS</div>
+                    <div class="col text-right"><img src="{{match.teamb.logo.url}}" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="row row-cols-3 p-3">
+                    <div class="col-2"></div>
+                    <div class="col-8 text-center"><a href="{% url 'team_select' match.match_no %}" class="btn btn-sm create link2">Join Now!</a></div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}        
+    </div>
+</div>
+{% include 'foot.html' %}
+{% endblock %}
