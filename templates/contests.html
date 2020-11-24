@@ -1,40 +1,169 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="container my-2 my-sm-5 p-2">
-    <h3 class="text-center text-dark abcd">CONTESTS <span class="text-danger">RUNNING</span></h3>
+<div class="container bg-light">
+    <div class="row p-3">
+        <div class="col text-center running bottom">Running</div>
+        <div class="col text-center waiting">Waiting</div>
+        <div class="col text-center joined">Joined</div>
+    </div>
 </div>
 
-<div class="container conts">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 fonttt">
-        {% for contest in contests %}
-        <div class="col my-2">
-            <div class=" border rad">
-                <div class="row row-cols-2 border-bottom p-3 m-2">
-                    <div class="col col-9">Rs1000 Worth Prize</div>
-                    <div class="col col-3"><span class="badge bg-danger">Match {{contest.match.match_no}}</span></div>
-                </div>
-                <div class="row p-1 m-2">
-                    <div class="col text-center text-danger">{{contest.match.match_date}}</div>
-                </div>
-                <div class="row row-cols-2 p-2 m-2">
-                    <div class="col">{{contest.match.teama}}</div>
-                    <div class="col text-right">{{contest.match.teamb}}</div>
-                </div>
-                <div class="row m-2">
-                    <div class="col"><img src="{{contest.match.teama.logo.url}}" alt="" class="img-fluid"></div>
-                    <div class="col text-center title">VS</div>
-                    <div class="col text-right"><img src="{{contest.match.teamb.logo.url}}" alt="" class="img-fluid">
+<div id="running">
+    <div class="container my-2 my-sm-5 p-2">
+        <h3 class="text-center text-dark abcd">CONTESTS <span class="text-danger">RUNNING</span></h3>
+    </div>
+    
+    <div class="container conts">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 fonttt">
+            {% for contest in contests %}
+            {% if not contest.waiting and contest.verified %}
+            <div class="col my-2">
+                <div class=" border rad">
+                    <div class="row row-cols-2 border-bottom p-3 m-2">
+                        <div class="col col-9">Rs1000 Worth Prize</div>
+                        <div class="col col-3"><span class="badge bg-danger">Match {{contest.match.match_no}}</span></div>
+                    </div>
+                    <div class="row p-1 m-2">
+                        <div class="col text-center text-danger">{{contest.match.match_date}}</div>
+                    </div>
+                    <div class="row row-cols-2 p-2 m-2">
+                        <div class="col">{{contest.match.teama}}</div>
+                        <div class="col text-right">{{contest.match.teamb}}</div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col"><img src="{{contest.match.teama.logo.url}}" alt="" class="img-fluid"></div>
+                        <div class="col text-center title">VS</div>
+                        <div class="col text-right"><img src="{{contest.match.teamb.logo.url}}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="row row-cols-3 p-3">
+                        <div class="col-2"></div>
+                        <div class="col-8 text-center"><a href="{% url 'contest_join' contest.id %}" class="btn btn-sm create link2">Join Now!</a></div>
+                        <div class="col-2"></div>
                     </div>
                 </div>
-                <div class="row row-cols-3 p-3">
-                    <div class="col-2"></div>
-                    <div class="col-8 text-center"><a href="{% url 'contest_join' contest.id %}" class="btn btn-sm create link2">Join Now!</a></div>
-                    <div class="col-2"></div>
+            </div>
+            {% endif %}
+            {% endfor %}        
+        </div>
+    </div>
+</div>
+<div id="waiting" class="hidden">
+    <div class="container my-2 my-sm-5 p-2">
+        <h3 class="text-center text-dark abcd">CONTESTS <span class="text-danger">RUNNING</span></h3>
+    </div>
+    
+    <div class="container conts">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 fonttt">
+            {% for contest.teams in contests %}
+            {% if  contest.teams.waiting %}
+            <div class="col my-2">
+                <div class=" border rad">
+                    <div class="row row-cols-2 border-bottom p-3 m-2">
+                        <div class="col col-9">Rs1000 Worth Prize</div>
+                        <div class="col col-3"><span class="badge bg-danger">Match {{contest.match.match_no}}</span></div>
+                    </div>
+                    <div class="row p-1 m-2">
+                        <div class="col text-center text-danger">{{contest.match.match_date}}</div>
+                    </div>
+                    <div class="row row-cols-2 p-2 m-2">
+                        <div class="col">{{contest.match.teama}}</div>
+                        <div class="col text-right">{{contest.match.teamb}}</div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col"><img src="{{contest.match.teama.logo.url}}" alt="" class="img-fluid"></div>
+                        <div class="col text-center title">VS</div>
+                        <div class="col text-right"><img src="{{contest.match.teamb.logo.url}}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="row row-cols-3 p-3">
+                        <div class="col-2"></div>
+                        <div class="col-8 text-center"><a href="{% url 'contest_join' contest.id %}" class="btn btn-sm create link2">Join Now!</a></div>
+                        <div class="col-2"></div>
+                    </div>
                 </div>
             </div>
+            {% endif %}
+            {% endfor %}        
         </div>
-        {% endfor %}        
+    </div>
+</div>
+<div id="joined" class="hidden">
+    <div class="container my-2 my-sm-5 p-2">
+        <h3 class="text-center text-dark abcd">CONTESTS <span class="text-danger">RUNNING</span></h3>
+    </div>
+    
+    <div class="container conts">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 fonttt">
+            {% for contest in contests %}
+            {% if  contest.joined %}
+            <div class="col my-2">
+                <div class=" border rad">
+                    <div class="row row-cols-2 border-bottom p-3 m-2">
+                        <div class="col col-9">Rs1000 Worth Prize</div>
+                        <div class="col col-3"><span class="badge bg-danger">Match {{contest.match.match_no}}</span></div>
+                    </div>
+                    <div class="row p-1 m-2">
+                        <div class="col text-center text-danger">{{contest.match.match_date}}</div>
+                    </div>
+                    <div class="row row-cols-2 p-2 m-2">
+                        <div class="col">{{contest.match.teama}}</div>
+                        <div class="col text-right">{{contest.match.teamb}}</div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col"><img src="{{contest.match.teama.logo.url}}" alt="" class="img-fluid"></div>
+                        <div class="col text-center title">VS</div>
+                        <div class="col text-right"><img src="{{contest.match.teamb.logo.url}}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="row row-cols-3 p-3">
+                        <div class="col-2"></div>
+                        <div class="col-8 text-center"><a href="{% url 'contest_join' contest.id %}" class="btn btn-sm create link2">Join Now!</a></div>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}        
+        </div>
     </div>
 </div>
 {% include 'foot.html' %}
+<script>
+    const runningBtn = document.querySelector('.running');
+    const waitingBtn = document.querySelector('.waiting');
+    const joinedBtn = document.querySelector('.joined');
+
+    const runningDiv = document.getElementById('running');
+    const waitingDiv = document.getElementById('waiting');
+    const joinedDiv = document.getElementById('joined');
+    runningBtn.addEventListener('click',check1);
+    waitingBtn.addEventListener('click',check2);
+    joinedBtn.addEventListener('click',check3);
+
+    function check1(){
+        runningBtn.classList.add('bottom');
+        waitingBtn.classList.remove('bottom');
+        joinedBtn.classList.remove('bottom');
+        runningDiv.classList.remove('hidden');
+        waitingDiv.classList.add('hidden');
+        joinedDiv.classList.add('hidden');
+    }
+    function check2(){
+        waitingBtn.classList.add('bottom');
+        runningBtn.classList.remove('bottom');
+        joinedBtn.classList.remove('bottom');
+        waitingDiv.classList.remove('hidden');
+        runningDiv.classList.add('hidden');
+        joinedDiv.classList.add('hidden');
+    }
+    function check3(){
+        joinedBtn.classList.add('bottom');
+        runningBtn.classList.remove('bottom');
+        waitingBtn.classList.remove('bottom');
+        joinedDiv.classList.remove('hidden');
+        waitingDiv.classList.add('hidden');
+        runningDiv.classList.add('hidden');
+    }
+</script>
 {% endblock %}

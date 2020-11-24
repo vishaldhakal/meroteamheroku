@@ -7,7 +7,10 @@ def index(request):
     context = {
         'top3':top_3_matches
     }
-    return render(request,'index.html',context)
+    if request.user.is_authenticated:
+        return render(request,'index.html',context)
+    else:
+        return redirect('login')
 
 def matches(request):
     matchess = Match.objects.order_by('match_no').all()
@@ -147,6 +150,8 @@ def contest_join_submit(request,no):
     if request.method == "POST":
         team = request.POST['radios']
         teamm = Team.objects.get(id=int(team))
+        teamm.waiting = True
+        teamm.save()
         contest = Contest.objects.get(id=no)
         contest.teams.add(teamm)
         contest.save()
@@ -154,9 +159,19 @@ def contest_join_submit(request,no):
         a = a+str(teamm.id)+teamm.name
         context = {
             'contest':contest,
-            'team':team,
+            'team':teamm,
             'rand':a
         }
         return render(request,'esewaform.html',context)
+    else:
+        return redirect('contest_join',no=no)
+
+def payment_submit(request,no):
+    if request.method == "POST":
+        data = request.POST['esewa']
+        teamm = Team.objects.get(id=no)
+        teamm.esewa = data
+        teamm.save()
+        return redirect('contests')
     else:
         return redirect('contest_join',no=no)

@@ -16,6 +16,8 @@
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3">
             {% for teams in teams_list %}
+            {% if teams in contest.teams.all %}
+            {% else %}
             <div class="form-check form-switch mycen">
                 <input class="form-check-input" type="radio" id="checkbox1{{teams.id}}" value="{{teams.id}}" name="radios">
                 <label class="form-check-label" for="checkbox1{{teams.id}}"><div class="col">
@@ -41,6 +43,7 @@
             </div>
                 
             </label>
+            {% endif %}
             {% endfor %}
             <div class="flexx">
                 <input type="submit" class="btn bg-mine text-white" value="Continue"/>

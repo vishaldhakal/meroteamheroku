@@ -2,21 +2,30 @@
 
 {% block body %}
 <div class="container my-2 my-sm-5 p-2">
-    <h3 class="text-center text-dark abcd">CLICK <span class="text-danger"> TO PAY !</span></h3>
+    <h3 class="text-center text-dark abcd">HOW <span class="text-danger"> TO PAY !</span></h3>
 </div>
 
-<form action="https://uat.esewa.com.np/epay/main" method="POST">
-    <input value="50" name="tAmt" type="hidden">
-    <input value="45" name="amt" type="hidden">
-    <input value="5" name="txAmt" type="hidden">
-    <input value="0" name="psc" type="hidden">
-    <input value="0" name="pdc" type="hidden">
-    <input value="epay_payment" name="scd" type="hidden">
-    <input value="{{rand}}" name="pid" type="hidden">
-    <input value="http://127.0.0.1:8000/" type="hidden" name="su">
-    <input value="http://127.0.0.1:8000/matches/" type="hidden" name="fu">
-    <input value="Pay Now" type="submit" class="bg-mine btn btn-md text-white ml-5">
-</form>
+<div class="container p-3">
+    <p>
+        We have sucessfully registered your team : <span class="text-danger">{{team.name}}</span> for this contest.
+        Now you have to Pay - RS 50 to the E-Sewa Id : <span class="title">9866316114 </span> with Remarks as Team Name then we will verify you and allow you as a participant in this contest.
+    </p>
+    <p class="mt-3">
+        You can see Yourself in the leaderboard after the payment verification !
+    </p>
+</div>
+
+<h4 class="text-center container p-3">
+    Submit Your Esewa <span class="text-danger">Username / ID</span> for Verification
+</h4>
+<form class="p-3" action="{% url 'payment_submit' team.id %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">E-Sewa ID / Username</label>
+      <input type="text" class="form-control" id="username" name="esewa">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
 
 {% include 'foot.html' %}
 {% endblock %}

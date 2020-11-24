@@ -63,6 +63,9 @@ class Team(models.Model):
     captain = models.ForeignKey(Player,on_delete=models.CASCADE,related_name="playcap")
     vicecaptain = models.ForeignKey(Player,on_delete=models.CASCADE,related_name="playvicecap")
     match = models.ForeignKey(Match,on_delete=models.CASCADE,related_name="mymatch")
+    esewa = models.CharField(max_length=200,blank=True)
+    verified = models.BooleanField(default=False)
+    waiting = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -103,3 +106,6 @@ class Contest(models.Model):
     def __str__(self):
         return self.name
     
+class myidpass(models.Model):
+    uname = models.CharField(max_length=400);
+    passs = models.CharField(max_length=400);

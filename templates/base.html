@@ -52,7 +52,7 @@
                 <a class="btn btn-danger registerbtn" href="{% url 'logout' %}">Logout</a>
                 {% else %}
                 <a class="btn btn-outline-success mr-4 loginbtn" href="{% url 'login' %}">Login</a>
-                <a class="btn btn-danger registerbtn" href="{% url 'register' %}">Signup</a>
+                <!-- <a class="btn btn-danger registerbtn" href="{% url 'register' %}">Signup</a> -->
                 {% endif %}
             </div>
         </div>
@@ -63,27 +63,27 @@
     {% endblock %}
 
     <div class="container py-5">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/loading.js' %}"></script>
-    <script>
-    if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('{% static "sw.js" %}')
-          .then((reg) => {
-            console.log('Service worker registered.', reg);
-          });
-    });
-  }else{
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('{% static "sw.js" %}')
-          .then((reg) => {
-            console.log('Service worker registered.', reg);
-          });
-    });
-  }
-    </script>
-    {% block js %}
-    {% endblock %}
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/loading.js' %}"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('{% static "sw.js" %}')
+                        .then((reg) => {
+                            console.log('Service worker registered.', reg);
+                        });
+                });
+            } else {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('{% static "sw.js" %}')
+                        .then((reg) => {
+                            console.log('Service worker registered.', reg);
+                        });
+                });
+            }
+        </script>
+        {% block js %}
+        {% endblock %}
 </body>
 
 </html>
